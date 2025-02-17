@@ -19,8 +19,6 @@ const validateLogin = [
   handleValidationErrors
 ];
 
-const router = express.Router();
-
 // Log in
 router.post(
     '/',
@@ -57,6 +55,10 @@ router.post(
       });
     }
   );
+
+const router = express.Router();
+
+
 
 router.delete(
     '/',
