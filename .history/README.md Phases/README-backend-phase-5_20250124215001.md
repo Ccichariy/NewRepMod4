@@ -343,6 +343,7 @@ router.post(
   }
 );
 ```
+<!-- start here -->
 ### Test the Signup Validation
 
 Test `validateSignup` by navigating to the [http://localhost:8000/api/csrf/restore]
