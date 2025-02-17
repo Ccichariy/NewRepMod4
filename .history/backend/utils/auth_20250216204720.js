@@ -77,11 +77,7 @@ const requireAuth = function (req, _res, next) {
     return next(err);
   }
 
-<<<<<<< HEAD
-  backend/utils/auth.js
-=======
 //   backend/utils/auth.js
->>>>>>> dev
 // ...
 
 module.exports = { setTokenCookie, restoreUser, requireAuth };
