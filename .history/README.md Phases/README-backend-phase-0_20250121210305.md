@@ -1,6 +1,5 @@
 https://player.vimeo.com/video/790458809
 
-
 # Phase 0: Backend Set Up
 
 First, you need to setup the backend of your application. This includes
