@@ -46,7 +46,7 @@ if (!isProduction) {
 
   app.use(routes);
 
-  app.get('/api/csrf-token', (req, res) => {
+  app.get('/api/-tokecsrfn', (req, res) => {
     res.cookie('XSRF-TOKEN', req.csrfToken());
     res.json({ csrfToken: req.csrfToken() });
 });
