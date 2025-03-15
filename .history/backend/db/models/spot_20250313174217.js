@@ -18,16 +18,6 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE',
         hooks: true
       });
-      Spot.hasMany(models.Review, {
-        foreignKey: 'spotId',
-        onDelete: 'CASCADE',
-        hooks: true
-      });
-      Spot.hasMany(models.Booking, {
-        foreignKey: 'spotId',
-        onDelete: 'CASCADE',
-        hooks: true
-      });
     }
   }
   Spot.init({
@@ -82,7 +72,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     description: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: false
       },
     price: {
@@ -90,11 +80,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           min: 0
-      },
-    }
   },
-  {
-  sequelize,
+}
+},
+    sequelize,
     modelName: 'Spot',
   });
   return Spot;

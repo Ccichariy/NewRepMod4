@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     spotId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+  
   },
     url: {
       type: DataTypes.STRING,

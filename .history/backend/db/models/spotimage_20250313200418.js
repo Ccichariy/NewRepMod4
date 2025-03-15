@@ -14,29 +14,14 @@ module.exports = (sequelize, DataTypes) => {
       SpotImage.belongsTo(models.Spot, { foreignKey: 'spotId' });
     }
   }
-
+    
   SpotImage.init({
-    spotId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-  },
-    url: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        isUrl: true
-      }
-    },
-    preview: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false
-    }
-  },
-
-  {
+    spotId: DataTypes.INTEGER,
+    url: DataTypes.STRING,
+    preview: DataTypes.BOOLEAN
+  }, {
     sequelize,
-    modelName: 'SpotImage'
+    modelName: 'SpotImage',
   });
-
   return SpotImage;
 };

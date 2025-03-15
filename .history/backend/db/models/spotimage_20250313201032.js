@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     spotId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+    }
   },
     url: {
       type: DataTypes.STRING,
@@ -28,15 +29,10 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     preview: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false
-    }
-  },
-
-  {
+      type: DataTypes.BOOLEAN
+  }, {
     sequelize,
-    modelName: 'SpotImage'
+    modelName: 'SpotImage',
   });
-
   return SpotImage;
 };
