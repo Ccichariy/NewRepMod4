@@ -181,23 +181,100 @@ router.post('/:id/images', requireAuth, async (req, res) => {
 
 router.put('/:id', requireAuth, validateSpot, async (req, res) => {
   const spotId = req.params.id;
-  const { name, description, price } = req.body;
 
-  const spot = await Spot.findByPk(spotId);
 
-  if (!spot) {
-    return res.status(404).json({ message: 'Spot not found' });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  try {
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+
+    const spot = await Spot.findByPk(spotId);
+
+    if (!spot) {
+      return res.status(404).json({ message: 'Spot not found' });
+    }
+
+    if (spot.ownerId !== req.user.id) {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
+
+    await spot.update({ address, city, state, country, lat, lng, name, description, price });
+
+    return res.json({
+      id: spot.id,
+      ownerId: spot.ownerId,
+      address: spot.address,
+      city: spot.city,
+      state: spot.state,
+      country: spot.country,
+      lat: spot.lat,
+      lng: spot.lng,
+      name: spot.name,
+      description: spot.description,
+      price: spot.price,
+      createdAt: spot.createdAt,
+      updatedAt: spot.updatedAt
+    });
+  } catch (error) {    // Handle validation errors
+    if (error.name === 'SequelizeValidationError') {
+      return res.status(400).json({ errors: error.errors.map(e => e.message) });
+    }
+  /*
+     - Otherwise, return 500 with error message
+*/
+
+return res.status(500).json({ message: 'Internal server error' });
   }
-
-  if (spot.ownerId !== req.user.id) {
-    return res.status(403).json({ message: 'Forbidden' });
-  }
-
-  await spot.update({ name, description, price });
-
-  res.json({ spot });
 });
 
+/*
+Export the router
+*/
+module.exports = router;
 /*
 10. Implement DELETE /api/spots/:id
 */
