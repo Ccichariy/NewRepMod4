@@ -8,22 +8,29 @@ module.exports = {
     if (process.env.NODE_ENV === 'production') {
       options.schema = process.env.SCHEMA;
     }
+    console.log('Running Spots Seed');
 
     // 2. Define up method:
     // - Find demo user
     const demoUser = await queryInterface.rawSelect('Users', {
       where: {
-        username: 'demo'
+        username: 'Demo-lition'
       },
     }, ['id']);
+    console.log('demoUser:', demoUser);
+
+    // console.log('Demo user ID:', demoUser); // should be a number
+
+  options.tableName = 'Spots';
 
     // - Create sample spots
-    await queryInterface.bulkInsert('Spots', [
+    try {
+    await queryInterface.bulkInsert(options, [
       {
         name: 'App Academy',
         address: '825 Battery St',
         city: 'San Francisco',
-        state: 'CA',
+        state: 'California',
         country: 'USA',
         lat: 37.7989,
         lng: -122.4015,
@@ -37,7 +44,7 @@ module.exports = {
         name: 'Sunny Retreat',
         address: '123 Sunshine Blvd',
         city: 'Los Angeles',
-        state: 'CA',
+        state: 'California',
         country: 'USA',
         lat: 34.0522,
         lng: -118.2437,
@@ -51,7 +58,7 @@ module.exports = {
         name: 'Mountain View',
         address: '456 Mountain Rd',
         city: 'Denver',
-        state: 'CO',
+        state: 'Colorado',
         country: 'USA',
         lat: 39.7392,
         lng: -104.9903,
@@ -61,10 +68,20 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       }
-    ], options);
+    ]);
+  } catch (err) {
+    console.error('Error inserting spots:', err);
+  }
+    console.log('Spots inserted');
+
+    const spot = await queryInterface.sequelize.query(
+      `SELECT id FROM Spots ORDER BY id DESC LIMIT 3;`,
+      { type: Sequelize.QueryTypes.SELECT }
+    );
 
     // - Create sample spot images
-    await queryInterface.bulkInsert('SpotImages', [
+    options.tableName = 'SpotImages';
+    await queryInterface.bulkInsert(options, [
       {
         spotId: 1, // Assuming IDs are sequentially assigned
         url: 'http://example.com/preview1.jpg',
