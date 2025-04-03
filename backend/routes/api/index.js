@@ -27,6 +27,8 @@ router.use('/session', sessionRouter);
 
 router.use('/users', usersRouter);
 
+router.use('/spots', spotsRouter);
+
 router.get('/set-token-cookie', async (_req, res) => {
   const user = await User.findOne({
     where: {
