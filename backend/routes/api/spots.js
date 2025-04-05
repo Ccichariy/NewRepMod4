@@ -101,7 +101,9 @@ router.get('/', validateQueryFilters, async (req, res) => {
 */
 
 router.get('/current', requireAuth, async (req, res) => {
-  const userId = req.user.id;
+  console.log('✅ HIT /api/spots/current route');
+
+const userId = req.user.id;
 
   const spots = await Spot.findAll({
     where: { ownerId: userId },
