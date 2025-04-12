@@ -11,7 +11,7 @@ const { ValidationError } = require('sequelize');
 const { environment } = require('./config');
 const isProduction = environment === 'production';
 
-const routes = require('./routes');
+const routes = require('./routes/');
 
 
 const app = express();
@@ -45,7 +45,7 @@ if (!isProduction) {
   );
 
   // app.use(routes);
-  app.use('/', routes);
+  app.use('/api', routes);
 
   app.get('/api/csrf-token', (req, res) => {
     res.cookie('XSRF-TOKEN', req.csrfToken());

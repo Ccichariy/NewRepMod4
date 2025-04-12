@@ -144,11 +144,12 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
   console.log(req);
 
   const { address, city, state, country, lat, lng, name, description, price } = req.body;
-  const ownerId = req.user.id;
+  const ownerId = .user.id;
 
-  const spot = await Spot.create({ address, city, state, country, lat, lng, name, description, price, ownerId });
+  const spot = await Spot.create({ name, description, price, ownerId });
 
   res.status(201).json({ spot });
+  res.status(201);
 });
 
 /*
@@ -199,7 +200,7 @@ router.put('/:id', requireAuth, validateSpot, async (req, res) => {
 
 
 
-
+req
 
 
 

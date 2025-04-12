@@ -3,9 +3,7 @@ const { User } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth.js');
 
 
-//0.
-const reviewsRouter = require('./reviews');
-
+//
 //1. Import express and create router
 const router = require('express').Router();
 
@@ -32,8 +30,6 @@ router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 
 router.use('/spots', spotsRouter);
-
-router.use('/reviews', reviewsRouter);
 
 router.get('/set-token-cookie', async (_req, res) => {
   const user = await User.findOne({

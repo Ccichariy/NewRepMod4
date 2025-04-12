@@ -149,6 +149,7 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
   const spot = await Spot.create({ address, city, state, country, lat, lng, name, description, price, ownerId });
 
   res.status(201).json({ spot });
+  res.status(201);
 });
 
 /*

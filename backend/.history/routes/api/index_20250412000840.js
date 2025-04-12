@@ -33,8 +33,6 @@ router.use('/users', usersRouter);
 
 router.use('/spots', spotsRouter);
 
-router.use('/reviews', reviewsRouter);
-
 router.get('/set-token-cookie', async (_req, res) => {
   const user = await User.findOne({
     where: {
