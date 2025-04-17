@@ -203,6 +203,12 @@ router.delete('/:reviewId', requireAuth, async (req, res) => {
   return res.status(200).json({ message: "Successfully deleted" });
 });
 
+const express = require('express');
+const { requireAuth } = require('../../utils/auth');
+const { ReviewImage, Review } = require('../../db/models');
+
+const router = express.Router();
+
 router.delete('/review-images/:imageId', requireAuth, async (req, res) => {
   const { imageId } = req.params;
 
@@ -226,5 +232,7 @@ router.delete('/review-images/:imageId', requireAuth, async (req, res) => {
 
   return res.status(200).json({ message: "Successfully deleted" });
 });
+
+module.exports = router;
 
 module.exports = router;

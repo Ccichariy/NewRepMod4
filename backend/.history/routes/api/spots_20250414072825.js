@@ -69,7 +69,7 @@ router.get('/', validateQueryFilters, async (req, res) => {
   const spots = await Spot.findAll({
     limit,
     offset,
-    include: [{ model: SpotImage, as: 'SpotImages', attributes: ['url'] }]
+    include: [{ model: SpotImage, attributes: ['url'] }]
   });
 
   res.json({ spots, page: parseInt(page), size: parseInt(size) });
@@ -102,7 +102,7 @@ router.get('/:id', async (req, res) => {
 
   const spot = await Spot.findByPk(spotId, {
     include: [
-      { model: SpotImage, as: 'SpotImages', attributes: ['url'] },
+      { model: SpotImage, attributes: ['url'] },
       { model: User, attributes: ['id', 'username'] },
       { model: Review }
     ]
@@ -220,32 +220,6 @@ router.get('/:spotId/reviews', async (req, res) => {
   return res.status(200).json({ Reviews: reviews });
 });
 
-// DELETE /api/spot-images/:imageId
-router.delete('/spot-images/:imageId', requireAuth, async (req, res) => {
-  const { imageId } = req.params;
-
-  const image = await SpotImage.findByPk(imageId, {
-    include: {
-      model: Spot, as: 'Spot'
-    }
-  });
-
-  if (!image) {
-    return res.status(404).json({
-      message: "Spot Image couldn't be found"
-    });
-  }
-
-  if (image.Spot.ownerId !== req.user.id) {
-    return res.status(403).json({
-      message: "Forbidden"
-    });
-  }
-
-  await image.destroy();
-
-  return res.status(200).json({ message: "Successfully deleted" });
-});
 
 
 module.exports = router;

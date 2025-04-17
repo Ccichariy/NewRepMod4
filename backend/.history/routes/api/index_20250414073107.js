@@ -2,9 +2,9 @@ const { setTokenCookie } = require('../../utils/auth.js');
 const { User } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth.js');
 
+const imageRouter = require('./images'); // or whatever file name you saved
 
-// const imageRouter = require('./images');
-
+router.use('/', imageRouter); // Mounts the DELETE routes
 
 
 //0.
@@ -23,10 +23,6 @@ const usersRouter = require('./users.js');
 //- spotsRouter
 const spotsRouter = require('./spots');
 
-const spotImagesRouter = require('./spotimages');
-
-const reviewImageRouter = require('./review-images');
-
 //3. Import restoreUser middleware
 const { restoreUser } = require("../../utils/auth.js");
 
@@ -41,11 +37,7 @@ router.use('/users', usersRouter);
 
 router.use('/spots', spotsRouter);
 
-router.use('/spot-images', spotImagesRouter);
-
 router.use('/reviews', reviewsRouter);
-
-router.use('/review-images', reviewImageRouter);
 
 router.get('/set-token-cookie', async (_req, res) => {
   const user = await User.findOne({
@@ -75,9 +67,6 @@ router.get(
 router.post('/test', (req, res) => {
   res.json({ requestBody: req.body });
 });
-
-// router.use('/', imageRouter); // Mounts the DELETE routes
-
 
 //6. Export router
 module.exports = router;
