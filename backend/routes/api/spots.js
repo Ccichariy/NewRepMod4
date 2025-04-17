@@ -35,19 +35,35 @@ const validateQueryFilters = [
   check('page')
     .optional()
     .isInt({ min: 1 })
-    .withMessage('Page must be a positive integer'),
+    .withMessage('Page must be greater than or equal to 1'),
   check('size')
     .optional()
-    .isInt({ min: 1 })
-    .withMessage('Size must be a positive integer'),
+    .isInt({ min: 1, max: 20 })
+    .withMessage('Size must be between 1 and 20'),
+    check('minLat')
+    .optional()
+    .isFloat({ min: -90, max: 90 })
+    .withMessage('Minimum latitude is invalid'),
+  check('maxLat')
+    .optional()
+    .isFloat({ min: -90, max: 90 })
+    .withMessage('Maximum latitude is invalid'),
+  check('minLng')
+    .optional()
+    .isFloat({ min: -180, max: 180 })
+    .withMessage('Minimum longitude is invalid'),
+  check('maxLng')
+    .optional()
+    .isFloat({ min: -180, max: 180 })
+    .withMessage('Maximum longitude is invalid'),
   check('minPrice')
     .optional()
     .isFloat({ min: 0 })
-    .withMessage('Minimum price must be a positive number'),
+    .withMessage('Minimum price must be greater than or equal to 0'),
   check('maxPrice')
     .optional()
     .isFloat({ min: 0 })
-    .withMessage('Maximum price must be a positive number'),
+    .withMessage('Maximum price must be greater than or equal to 0'),
   handleValidationErrors
 ];
 
@@ -62,18 +78,52 @@ const validateReview = [
 ];
 
 router.get('/', validateQueryFilters, async (req, res) => {
-  const { page = 1, size = 20 } = req.query;
+  const { page = 1, size = 20, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
   const limit = parseInt(size);
   const offset = (parseInt(page) - 1) * limit;
+
+  const where = {};
+
+if (minLat !== undefined) where.lat = { [Op.gte]: parseFloat(minLat) };
+if (maxLat !== undefined)
+  where.lat = { ...where.lat, [Op.lte]: parseFloat(maxLat) };
+if (minLng !== undefined) where.lng = { [Op.gte]: parseFloat(minLng) };
+if (maxLng !== undefined)
+  where.lng = { ...where.lng, [Op.lte]: parseFloat(maxLng) };
+if (minPrice !== undefined) where.price = { [Op.gte]: parseFloat(minPrice) };
+if (maxPrice !== undefined)
+  where.price = { ...where.price, [Op.lte]: parseFloat(maxPrice) };
 
   const spots = await Spot.findAll({
     limit,
     offset,
-    include: [{ model: SpotImage, as: 'SpotImages', attributes: ['url'] }]
+    include: [{ model: SpotImage, as: 'SpotImages', attributes: ['url'], where: { preview: true }, required: false },
+    {
+      model: Review,
+      attributes: []
+    }],
+    attributes: {
+      include: [
+        [Sequelize.fn('AVG', Sequelize.col('Reviews.stars')), 'avgRating']
+      ]
+    },
+    group: ['Spot.id', 'SpotImages.id'],
+    subQuery: false
   });
 
-  res.json({ spots, page: parseInt(page), size: parseInt(size) });
-});
+  const formattedSpots = spots.map(spot => {
+    const json = spot.toJSON();
+    json.previewImage = json.SpotImages?.[0]?.url || 'image url';
+    delete json.SpotImages;
+    return json;
+  });
+
+  res.status(200).json({
+    Spots: formattedSpots,
+    page: parseInt(page),
+    size: parseInt(size)
+  });
+  });
 
 router.get('/current', requireAuth, async (req, res) => {
   const userId = req.user.id;
