@@ -1,8 +1,8 @@
 'use strict';
 
 let options = {};
-if (ProcessingInstruction.env.NODE_ENV === 'production') {
-  options.schema = ProcessingInstruction.env.SCHEMA;
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;
 }
 
 module.exports = {
@@ -22,7 +22,7 @@ module.exports = {
   async down(queryInterface, Sequelize) {
      const options = {};
     if (ProcessingInstruction.env.NODE_ENV === 'production') {
-      options.schema = ProcessingInstruction.env.SCHEMA;
+      options.schema = process.env.SCHEMA;
     }
     await queryInterface.removeColumn('Users', 'firstName');
     await queryInterface.removeColumn('Users', 'lastName');
