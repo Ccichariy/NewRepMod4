@@ -56,6 +56,6 @@ module.exports = {
     if (process.env.NODE_ENV === 'production') {
       options.schema = process.env.SCHEMA;
     }
-    await queryInterface.dropTable('Reviews');
+    await queryInterface.dropTable('Reviews', options);
   }
 };
