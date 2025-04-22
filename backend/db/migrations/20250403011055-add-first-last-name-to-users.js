@@ -1,5 +1,10 @@
 'use strict';
 
+let options = {};
+if (ProcessingInstruction.env.NODE_ENV === 'production') {
+  options.schema = ProcessingInstruction.env.SCHEMA;
+}
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.addColumn('Users', 'firstName', {
@@ -15,6 +20,10 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
+     const options = {};
+    if (ProcessingInstruction.env.NODE_ENV === 'production') {
+      options.schema = ProcessingInstruction.env.SCHEMA;
+    }
     await queryInterface.removeColumn('Users', 'firstName');
     await queryInterface.removeColumn('Users', 'lastName');
   }
