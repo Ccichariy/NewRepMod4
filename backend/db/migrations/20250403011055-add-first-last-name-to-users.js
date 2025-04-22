@@ -21,7 +21,7 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
      const options = {};
-    if (ProcessingInstruction.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV === 'production') {
       options.schema = process.env.SCHEMA;
     }
     await queryInterface.removeColumn('Users', 'firstName');
