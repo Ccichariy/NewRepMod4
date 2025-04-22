@@ -17,13 +17,25 @@ module.exports = {
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'Users', key: 'id' },
+        references: {
+          model: {
+            tableName: 'Users',
+            schema: process.env.SCHEMA
+          },
+          key: 'id'
+        },
         onDelete: 'CASCADE'
       },
       spotId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'Spots', key: 'id' },
+        references: {
+          model: {
+            tableName: 'Spots',
+            schema: process.env.SCHEMA
+          },
+          key: 'id'
+        },
         onDelete: 'CASCADE'
       },
       review: {
@@ -48,11 +60,11 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
-    });
+    }, options);
   },
 
   async down(queryInterface, Sequelize) {
-    const options = {}
+    const options = {};
     if (process.env.NODE_ENV === 'production') {
       options.schema = process.env.SCHEMA;
     }

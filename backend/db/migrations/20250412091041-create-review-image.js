@@ -18,7 +18,13 @@ module.exports = {
       reviewId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: 'Reviews', key: 'id' },
+        references: {
+          model: {
+            tableName: 'Reviews',
+            schema: process.env.SCHEMA
+          },
+          key: 'id'
+        },
         onDelete: 'CASCADE'
       },
       url: {
@@ -35,7 +41,7 @@ module.exports = {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
-    });
+    }, options);
   },
 
   async down(queryInterface, Sequelize) {
@@ -43,6 +49,7 @@ module.exports = {
     if (process.env.NODE_ENV === 'production') {
       options.schema = process.env.SCHEMA;
     }
+
     await queryInterface.dropTable('ReviewImages', options);
   }
 };
