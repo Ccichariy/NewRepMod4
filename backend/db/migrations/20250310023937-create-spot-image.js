@@ -7,7 +7,7 @@ module.exports = {
     const options = {};
 
     if (process.env.NODE_ENV === 'production') {
-      options.schema = 'public'; // Set schema if in production
+      options.schema = process.env.SCHEMA; // Set schema if in production
     }
 
     await queryInterface.createTable('SpotImages', {
@@ -51,7 +51,7 @@ module.exports = {
   async down(queryInterface, Sequelize) {
     const options = {};
     if (process.env.NODE_ENV === 'production') {
-      options.schema = 'public';
+      options.schema = process.env.SCHEMA;
     }
 
     await queryInterface.dropTable('SpotImages', options);

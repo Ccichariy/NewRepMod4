@@ -42,7 +42,12 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    options.tableName = "Users";
-    return queryInterface.dropTable(options);
+    // options.tableName = "Users";
+    const option = {};
+    if (process.env.NODE_ENV === 'production') {
+      options.schema = process.env.SCHEMA;
+    }
+
+    await queryInterface.dropTable('Users', options);
   }
 };
