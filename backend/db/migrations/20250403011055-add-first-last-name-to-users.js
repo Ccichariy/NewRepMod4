@@ -20,7 +20,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-     const options = {};
+    const options = {};
     if (process.env.NODE_ENV === 'production') {
       options.schema = process.env.SCHEMA;
     }
