@@ -176,7 +176,8 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
 
 router.post('/:id/images', requireAuth, async (req, res) => {
   const spotId = req.params.id;
-  const { url } = req.body;
+  const { url, preview } = req.body;
+
 
   try {
     const spot = await Spot.findByPk(spotId);
@@ -191,7 +192,7 @@ router.post('/:id/images', requireAuth, async (req, res) => {
       return res.status(403).json({ message: 'Forbidden' });
     }
 
-    const image = await SpotImage.create({ spotId, url });
+    const image = await SpotImage.create({ spotId, url, preview });
 
     res.status(201).json({ image });
   } catch (error) {
