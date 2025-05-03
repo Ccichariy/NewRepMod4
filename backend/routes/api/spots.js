@@ -273,8 +273,8 @@ router.get('/:spotId/reviews', async (req, res) => {
 });
 
 
-// DELETE /api/spots/:spotId
-router.delete('/spots/:spotId', requireAuth, async (req, res) => {
+// DELETE /api/:spotId
+router.delete('/:spotId', requireAuth, async (req, res) => {
   const { spotId } = req.params;
   const userId = req.user.id;
 
