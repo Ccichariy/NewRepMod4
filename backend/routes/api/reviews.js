@@ -138,6 +138,11 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
   }
 
   if (review.userId !== userId) {
+
+    console.log("User: ", req.user);
+    console.log("Review: ", review);
+
+
     return res.status(403).json({ message: "Forbidden" });
   }
 

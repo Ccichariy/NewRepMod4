@@ -222,7 +222,14 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
   const { spotId } = req.params;
   const { review, stars } = req.body;
 
+
+  console.log("params:", req.params);
+
   const spot = await Spot.findByPk(spotId);
+
+
+  console.log("spot: ", spot);
+
   if (!spot) {
     return res.status(404).json({ message: "Spot couldn't be found" });
   }
