@@ -21,7 +21,18 @@ const validateLogin = [
 
 const router = express.Router();
 
-// Log in
+// Log in a User
+
+// User 1 name = Demo-lition
+// User 1 password = password
+
+// The seeded usernames and passwords
+// can be found in the seeder user file
+
+// Body = {
+// credential: username or email
+// password: look up password for user from get all users endpoint
+// }
 router.post(
     '/',
     validateLogin,
@@ -47,6 +58,8 @@ router.post(
 
       const safeUser = {
         id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
         username: user.username,
       };
@@ -75,6 +88,8 @@ router.delete(
       if (user) {
         const safeUser = {
           id: user.id,
+          firstName: user.firstName,
+          lastName: user.lastName,
           email: user.email,
           username: user.username,
         };
