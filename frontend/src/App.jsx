@@ -3,10 +3,10 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
-// import LoginFormPage from './components/LoginFormModal/LoginFormModal.jsx';
+import LoginFormPage from './components/LoginFormModal/LoginFormModal.jsx';
 import SignupFormPage from './components/SignupFormModal/SignupFormModal.jsx';
-import Navigation from './components/Navigation';
-import * as sessionActions from './store/session';
+import Navigation from './components/Navigation/Navigation.jsx';
+import * as sessionActions from './store/session.js';
 
 function Layout() {
   const dispatch = useDispatch();
