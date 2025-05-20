@@ -147,22 +147,32 @@ router.get('/current', requireAuth, async (req, res) => {
   }
 });
 
-router.get('/:id', async (req, res) => {
-  const spotId = req.params.id;
+router.get('/:spotId', async (req, res) => {
+  const { spotId } = req.params;
 
   const spot = await Spot.findByPk(spotId, {
     include: [
-      { model: SpotImage, as: 'SpotImages', attributes: ['url'] },
-      { model: User, attributes: ['id', 'username'] },
-      { model: Review }
+      {
+        model: SpotImage,
+        as: 'SpotImages',
+        attributes: ['id', 'url', 'preview']
+      },
+      {
+        model: User,
+        as: 'Owner',
+        attributes: ['id', 'firstName', 'lastName']
+      }
     ]
   });
 
   if (!spot) {
-    return res.status(404).json({ message: 'Spot not found' });
+    return res.status(404).json({
+      message: "Spot couldn't be found",
+      statusCode: 404
+    });
   }
 
-  res.json({ spot });
+  return res.status(200).json(spot);
 });
 
 router.post('/', requireAuth, validateSpot, async (req, res) => {

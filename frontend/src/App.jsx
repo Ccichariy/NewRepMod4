@@ -7,6 +7,17 @@ import LoginFormPage from './components/LoginFormModal/LoginFormModal.jsx';
 import SignupFormPage from './components/SignupFormModal/SignupFormModal.jsx';
 // import Navigation from './components/Navigation/Navigation.jsx';
 import * as sessionActions from './store/session.js';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import CreateSpotForm from './components/Spots/CreateSpotForm';
+import SpotDetailsPage from './components/Spots/SpotDetailsPage.jsx';
+
+
+<Router>
+  <Routes>
+    <Route path="/spots/new" element={<CreateSpotForm />} />
+ other routes here
+  </Routes>
+</Router>
 
 function Layout() {
   const dispatch = useDispatch();
@@ -38,6 +49,13 @@ const router = createBrowserRouter([
       {
         path: '/signup',
         element: <SignupFormPage />
+      },
+      { path: '/spots/new', 
+        element: <CreateSpotForm /> 
+      },
+      {
+        path: '/spots/:spotId',
+        element: <SpotDetailsPage />
       }
     ]
   }
