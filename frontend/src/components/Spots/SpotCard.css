@@ -1,0 +1,75 @@
+.spot-card {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  position: relative;
+  /* adjust min-height so everything fits neatly */
+  min-height: 360px;
+}
+
+/* Spot name sits above the image */
+.spot-name {
+  padding: 0.75rem 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111;
+}
+
+/* The preview image */
+.spot-preview-image {
+  width: 100%;
+  height: 200px;    /* ~205px per wireframe */
+  object-fit: cover;
+}
+
+/* City, State below the image */
+.spot-location {
+  padding: 0.5rem 1rem 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Price below location */
+.spot-price {
+  padding: 0.25rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #111;
+}
+
+/* Star rating pinned to bottom-right */
+.spot-rating {
+  margin-top: auto;       /* pushes it to the bottom */
+  padding: 0 1rem 1rem;
+  font-size: 0.9rem;
+  color: #111;
+  align-self: flex-end;   /* right-align within the card */
+}
+
+
+/* .spot-card {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.spot-image {
+  width: 100%;
+  height: 200px;      
+  object-fit: cover;
+}
+
+.spot-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+.spot-price {
+  margin-top: 0.25rem;
+  font-weight: bold;
+} */

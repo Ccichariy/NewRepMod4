@@ -1,0 +1,16 @@
+# 1. Install all Node dependencies (both root‐level helpers and your backend)
+npm install
+
+# 2. Go into your backend folder
+cd backend
+
+# 3. Make sure sqlite3 and the CLI are installed locally
+npm install sqlite3
+npm install --save-dev sequelize-cli
+
+# 4. Run your migrations to create the tables
+npx sequelize-cli db:migrate
+
+# 5. Populate your tables with your seed data
+npx sequelize-cli db:seed:all
+

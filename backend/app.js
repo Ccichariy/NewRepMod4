@@ -20,20 +20,16 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.json());
 
-// Security Middleware
 if (!isProduction) {
-    // enable cors only in development
     app.use(cors());
   }
 
-  // helmet helps set a variety of headers to better secure your app
   app.use(
     helmet.crossOriginResourcePolicy({
       policy: "cross-origin"
     })
   );
 
-  // Set the _csrf token and create req.csrfToken method
   app.use(
     csurf({
       cookie: {
@@ -44,7 +40,6 @@ if (!isProduction) {
     })
   );
 
-  // app.use(routes);
   app.use('/', routes);
 
   app.get('/api/csrf-token', (req, res) => {
@@ -61,7 +56,6 @@ if (!isProduction) {
   });
 
   app.use((err, _req, _res, next) => {
-    // check if error is a Sequelize error:
     if (err instanceof ValidationError) {
       let errors = {};
       for (let error of err.errors) {

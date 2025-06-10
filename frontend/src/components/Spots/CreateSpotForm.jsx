@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createSpot } from "../../store/spots.js";
@@ -67,7 +67,6 @@ dispatch(createSpot(spotData))
       })
     });
 
-    // Add the 4 optional images
     const imageUrls = [image1, image2, image3, image4];
     for (let url of imageUrls) {
       if (url) {

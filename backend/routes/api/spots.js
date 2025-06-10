@@ -113,6 +113,11 @@ if (maxPrice !== undefined)
 
   const formattedSpots = spots.map(spot => {
     const json = spot.toJSON();
+
+
+    console.log("spot", spot);
+    console.log("spot json: ", spot.toJSON());
+
     json.previewImage = json.SpotImages?.[0]?.url || 'image url';
     delete json.SpotImages;
     return json;
@@ -161,6 +166,11 @@ router.get('/:spotId', async (req, res) => {
         model: User,
         as: 'Owner',
         attributes: ['id', 'firstName', 'lastName']
+      },
+      {
+        model: Review,
+        as: 'Reviews',
+        attributes: ['stars'] // just get raw stars for computing avg/count
       }
     ]
   });
@@ -172,8 +182,25 @@ router.get('/:spotId', async (req, res) => {
     });
   }
 
-  return res.status(200).json(spot);
+  const spotJSON = spot.toJSON();
+  const reviews = spotJSON.Reviews || [];
+
+  // Calculate values
+  const numReviews = reviews.length;
+  const avgRating = numReviews
+    ? reviews.reduce((sum, r) => sum + r.stars, 0) / numReviews
+    : null;
+
+  // Attach to response
+  spotJSON.numReviews = numReviews;
+  spotJSON.avgRating = avgRating;
+
+  // Optional: clean up
+  delete spotJSON.Reviews;
+
+  return res.status(200).json(spotJSON);
 });
+
 
 router.post('/', requireAuth, validateSpot, async (req, res) => {
   const { address, city, state, country, lat, lng, name, description, price } = req.body;

@@ -1,0 +1,148 @@
+/* ReviewList.css */
+
+/* Container around entire reviews section */
+.reviews {
+  margin-top: 2rem;
+  border-top: 1px solid #ddd;
+  padding-top: 1.5rem;
+}
+
+/* Heading with star icon and count */
+.reviews__heading {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  color: #333;
+}
+
+.reviews__heading i.fa-star {
+  color: #ffb400;
+  margin-right: 0.25rem;
+}
+
+/* “Post Your Review” button container (centers the button) */
+.reviews__post-button {
+  margin-bottom: 1rem;
+}
+
+/* No-reviews text */
+.reviews__no-reviews {
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+/* Single review item */
+.review-item {
+  border-bottom: 1px solid #eee;
+  padding: 1rem 0;
+}
+
+/* Header row: reviewer’s name on left, date on right */
+.review-item__header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.review-item__header span {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+/* Review text paragraph */
+.review-item__text {
+  margin-left: 0.25rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+/* Delete button for reviews owned by the current user */
+.review-item__delete-btn {
+  background: transparent;
+  border: none;
+  color: #e04e52;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-left: 0.25rem;
+}
+
+.review-item__delete-btn:hover {
+  text-decoration: underline;
+}
+/* ReviewList.css */
+
+/* Container around entire reviews section */
+.reviews {
+  margin-top: 2rem;
+  border-top: 1px solid #ddd;
+  padding-top: 1.5rem;
+}
+
+/* Heading with star icon and count */
+.reviews__heading {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  color: #333;
+}
+
+.reviews__heading i.fa-star {
+  color: #ffb400;
+  margin-right: 0.25rem;
+}
+
+/* “Post Your Review” button container (centers the button) */
+.reviews__post-button {
+  margin-bottom: 1rem;
+}
+
+/* No-reviews text */
+.reviews__no-reviews {
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+/* Single review item */
+.review-item {
+  border-bottom: 1px solid #eee;
+  padding: 1rem 0;
+}
+
+/* Header row: reviewer’s name on left, date on right */
+.review-item__header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.review-item__header span {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+/* Review text paragraph */
+.review-item__text {
+  margin-left: 0.25rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+/* Delete button for reviews owned by the current user */
+.review-item__delete-btn {
+  background: transparent;
+  border: none;
+  color: #e04e52;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-left: 0.25rem;
+}
+
+.review-item__delete-btn:hover {
+  text-decoration: underline;
+}

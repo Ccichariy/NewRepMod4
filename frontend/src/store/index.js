@@ -1,3 +1,14 @@
-import configureStore from './store';
+import { configureStore } from '@reduxjs/toolkit';
+import sessionReducer from './session';   
+import spotsReducer from './spots';      
+import reviewsReducer from './reviews';   
 
-export default configureStore;
+const store = configureStore({
+  reducer: {
+    session: sessionReducer,
+    spots: spotsReducer,
+    reviews: reviewsReducer,
+  },
+});
+
+export default store;

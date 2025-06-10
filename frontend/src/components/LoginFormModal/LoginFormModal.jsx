@@ -1,10 +1,13 @@
-// frontend/src/components/LoginFormModal/LoginFormModal.jsx
 
 import { useState } from 'react';
 import * as sessionActions from '../../store/session';
 import { useDispatch } from 'react-redux';
-import { useModal } from '../../context/Modal';
+// import { useModal } from '../../context/Modal';
+// import { Modal } from './Modal';
+import { useModal } from '../../context/ModalContext';
+
 import './LoginForm.css';
+// import Cookies from 'js-cookie'; 
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -19,12 +22,25 @@ function LoginFormModal() {
     return dispatch(sessionActions.login({ credential, password }))
       .then(closeModal)
       .catch(async (res) => {
-        const data = await res.json();
-        if (data && data.errors) {
-          setErrors(data.errors);
+        console.log("Login error response:", res);
+
+        try {
+          const data = await res.json();
+          if (data?.errors) setErrors(data.errors);
+        } catch (err) {
+          console.error("Could not parse JSON:", err);
+          setErrors({ credential: "An unexpected error occurred." });
         }
       });
   };
+const handleDemoLogin = (e) => {
+  e.preventDefault();
+  return dispatch(sessionActions.login({ credential: 'Demo-lition', password: 'password' }))
+    .then(closeModal)
+    .catch((res) => {
+      console.error("Demo user login failed", res);
+    });
+};
 
   return (
     <>
@@ -51,7 +67,14 @@ function LoginFormModal() {
         {errors.credential && (
           <p>{errors.credential}</p>
         )}
-        <button type="submit">Log In</button>
+        <button type="submit"
+          disabled={credential.length < 4 || password.length < 6}
+        >
+        Log In</button>
+        <button onClick={handleDemoLogin} type="button">
+  Log in as Demo User
+</button>
+
       </form>
     </>
   );

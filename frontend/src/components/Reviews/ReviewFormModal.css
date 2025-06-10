@@ -1,0 +1,94 @@
+/* ReviewFormModal.css */
+
+/* Container for the modal’s contents */
+.review-modal__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Title inside modal */
+.review-modal__title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Form itself */
+.review-modal__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Error messages (from server validation) */
+.review-modal__error {
+  color: #e04e52;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+/* The textarea for review text */
+.review-modal__textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Container for the star inputs */
+.review-modal__stars {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+/* Each star label */
+.review-modal__star-label {
+  cursor: pointer;
+  margin: 0 0.25rem;
+  font-size: 2rem;
+  user-select: none;
+}
+
+/* Hide the native radio input */
+.review-modal__star-input {
+  display: none;
+}
+
+/* Empty star: gray */
+.review-modal__star-label .empty {
+  color: #ccc;
+}
+
+/* Filled star: gold */
+.review-modal__star-label .filled {
+  color: #ffb400;
+}
+
+/* Submit button */
+.review-modal__submit {
+  background-color: #ff5a5f;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.review-modal__submit:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.review-modal__submit:not(:disabled):hover {
+  background-color: #e04e52;
+}

@@ -16,11 +16,18 @@ const setTokenCookie = (res, user) => {
       email: user.email,
       username: user.username,
     };
+
+
+    console.log("Backend user", user);
+
     const token = jwt.sign(
       { data: safeUser },
       secret,
       { expiresIn: parseInt(expiresIn) } // 604,800 seconds = 1 week
     );
+
+
+    console.log("Token: ", token);
 
     const isProduction = process.env.NODE_ENV === "production";
 

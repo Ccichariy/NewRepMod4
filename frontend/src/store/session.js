@@ -1,4 +1,5 @@
 import { csrfFetch } from './csrf.js';
+import Cookies from 'js-cookie';
 
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
@@ -13,6 +14,10 @@ const removeUser = () => ({
 });
 
 export const login = ({ credential, password }) => async dispatch => {
+  
+  console.log("XSRF Cookie:", Cookies.get("XSRF-TOKEN"));
+  
+  
   const response = await csrfFetch("/api/session", {
     method: "POST",
     body: JSON.stringify({ credential, password })

@@ -1,0 +1,15 @@
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+}
+.nav-links a { margin-left: 1rem; cursor: pointer; }
+
+.logo img,
+.nav-links a,
+button,
+.spot-card {
+  cursor: pointer;
+}
+

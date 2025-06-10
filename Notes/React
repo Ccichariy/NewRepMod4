@@ -1,0 +1,4 @@
+// Reduce in javascript = reduce()
+[1, 2, 3, 4].reduce((acc, curr) => acc + curr, 0); // 10
+
+// Flux is the previous state management pattern used by React.
