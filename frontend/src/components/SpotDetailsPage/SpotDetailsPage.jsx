@@ -42,7 +42,9 @@ function SpotDetailsPage() {
     Reviews = []
   } = spot;
 
-  const reviews = Reviews;
+  const reviews = [...Reviews].sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
 
   const previewImage = SpotImages?.find(img => img.preview) || SpotImages[0];
   const otherImages = SpotImages?.filter(img => !img.preview);
