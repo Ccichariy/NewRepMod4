@@ -9,7 +9,7 @@ import {
 import Navigation        from './components/Navigation/Navigation.jsx';
 import LoginFormModal    from './components/LoginFormModal/LoginFormModal.jsx';
 import SignupFormModal   from './components/SignupFormModal/SignupFormModal.jsx';
-import CreateSpotForm    from './components/Spots/CreateSpotForm.jsx';
+import CreateSpotForm    from './components/CreateSpotForm/CreateSpotForm.jsx';
 import SpotDetailsPage   from './components/SpotDetailsPage/SpotDetailsPage.jsx';
 
 import * as sessionActions from './store/session.js';

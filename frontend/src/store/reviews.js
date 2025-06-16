@@ -1,12 +1,11 @@
-// /src/store/reviews.js
 import { csrfFetch } from './csrf'; // adjust path if needed
+import { fetchSpotDetails } from './spots'; // or the correct path to your spots store
 
-// ---------- Action Types ----------
 const LOAD_SPOT_REVIEWS = 'reviews/LOAD_SPOT_REVIEWS';
 const CREATE_REVIEW    = 'reviews/CREATE_REVIEW';
+// const READ_REVIEW = 'reviews/READ_REVIEW';
 const DELETE_REVIEW    = 'reviews/DELETE_REVIEW';
 
-// ---------- Action Creators ----------
 const loadSpotReviews = (spotId, reviews) => ({
   type: LOAD_SPOT_REVIEWS,
   payload: { spotId, reviews },
@@ -17,12 +16,18 @@ const createReviewAction = (spotId, review) => ({
   payload: { spotId, review },
 });
 
+
+// const readReviewAction = (spotId, review) => ({
+//   type: READ_REVIEW,
+//   payload: { spotId, review },
+// });
+
 const deleteReviewAction = (spotId, reviewId) => ({
   type: DELETE_REVIEW,
   payload: { spotId, reviewId },
 });
 
-// ---------- Thunks ----------
+// Thunks
 
 // Fetch all reviews for a given spot
 export const fetchSpotReviews = (spotId) => async (dispatch) => {
@@ -47,6 +52,7 @@ export const createReview = (spotId, payload) => async (dispatch) => {
     // The API returns the newly created review object, e.g.:
     // { id, userId, spotId, review, stars, createdAt, User: { firstName, … } }
     dispatch(createReviewAction(spotId, newReview));
+    dispatch(fetchSpotDetails(spotId)); 
     return newReview;
   } else if (res.status === 400) {
     // Validation errors
@@ -89,6 +95,15 @@ export default function reviewsReducer(state = initialState, action) {
       newState[spotId] = [review, ...newState[spotId]];
       return newState;
     }
+    // case READ_REVIEW: {
+    // const { spotId, review } = action.payload;
+    // const newState = { ...state };
+    // // If there were no reviews before, initialize array
+    // if (!newState[spotId]) newState[spotId] = [];
+    // newState[spotId] = [review, ...newState[spotId]];
+    // return newState;
+    // }
+
     case DELETE_REVIEW: {
       const { spotId, reviewId } = action.payload;
       const newState = { ...state };

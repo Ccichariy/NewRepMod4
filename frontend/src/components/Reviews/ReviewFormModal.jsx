@@ -1,9 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { createReview } from '../../store/reviews';
-// import { useModal } from '../../context/Modal.jsx';
-// import { Modal } from './Modal';
 import { useModal } from '../../context/ModalContext';
 
 import './ReviewFormModal.css';
@@ -12,21 +10,18 @@ export default function ReviewFormModal() {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const { spotId } = useParams();
-  // const user = useSelector((state) => state.session.user);
 
-  // Local state for form inputs
   const [review, setReview] = useState('');
   const [stars, setStars] = useState(0);
   const [errors, setErrors] = useState({});
+  const [error, setError] = useState(null);
 
-  // Determine if the submit button should be disabled:
-  // - review text length ≥ 10 (after trimming)
-  // - stars > 0
   const isDisabled = !(review.trim().length >= 10 && stars > 0);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({});
+    setError(null);
 
     const payload = {
       review: review.trim(),
@@ -37,23 +32,38 @@ export default function ReviewFormModal() {
       await dispatch(createReview(spotId, payload));
       closeModal();
     } catch (res) {
-      // If validation errors come back (status 400), set them in local state
       if (res.status === 400) {
         const data = await res.json();
-        if (data && data.errors) setErrors(data.errors);
+        if (data?.errors) setErrors(data.errors);
+        if (data?.message) setError(data.message);
+      } else {
+        setError('An unexpected error occurred. Please try again.');
       }
     }
   };
 
+  // Reset form when modal unmounts
+  useEffect(() => {
+    return () => {
+      setReview('');
+      setStars(0);
+      setErrors({});
+      setError(null);
+    };
+  }, []);
+
   return (
     <div className="review-modal__container">
       <h2 className="review-modal__title">How was your stay?</h2>
+
+      {/* General server error message */}
+      {error && <p className="review-modal__error">{error}</p>}
+
       <form onSubmit={handleSubmit} className="review-modal__form">
-        {/* Display server-side validation errors, if any */}
+        {/* Field-specific validation errors */}
         {errors.review && <p className="review-modal__error">{errors.review}</p>}
         {errors.stars && <p className="review-modal__error">{errors.stars}</p>}
 
-        {/* Textarea for the review text */}
         <textarea
           className="review-modal__textarea"
           value={review}
@@ -62,7 +72,6 @@ export default function ReviewFormModal() {
           required
         />
 
-        {/* Star‐rating inputs */}
         <div className="review-modal__stars">
           {[1, 2, 3, 4, 5].map((num) => (
             <label key={num} className="review-modal__star-label">
@@ -73,13 +82,11 @@ export default function ReviewFormModal() {
                 onChange={() => setStars(num)}
                 className="review-modal__star-input"
               />
-              {/* Filled star if num ≤ stars, otherwise empty */}
               <span className={num <= stars ? 'filled' : 'empty'}>★</span>
             </label>
           ))}
         </div>
 
-        {/* Submit button */}
         <button
           type="submit"
           className="review-modal__submit"

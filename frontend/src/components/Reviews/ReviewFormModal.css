@@ -92,3 +92,9 @@
 .review-modal__submit:not(:disabled):hover {
   background-color: #e04e52;
 }
+
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}

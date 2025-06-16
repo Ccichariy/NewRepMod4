@@ -170,9 +170,14 @@ router.get('/:spotId', async (req, res) => {
       {
         model: Review,
         as: 'Reviews',
-        attributes: ['stars'] // just get raw stars for computing avg/count
-      }
-    ]
+        attributes: ['id', 'userId', 'review', 'stars', 'createdAt', 'updatedAt'],
+        include: [
+          {
+            model: User,
+            attributes: ['id', 'firstName', 'lastName']
+          }
+       ]
+    }]
   });
 
   if (!spot) {
@@ -185,17 +190,14 @@ router.get('/:spotId', async (req, res) => {
   const spotJSON = spot.toJSON();
   const reviews = spotJSON.Reviews || [];
 
-  // Calculate values
   const numReviews = reviews.length;
   const avgRating = numReviews
     ? reviews.reduce((sum, r) => sum + r.stars, 0) / numReviews
     : null;
 
-  // Attach to response
   spotJSON.numReviews = numReviews;
   spotJSON.avgRating = avgRating;
 
-  // Optional: clean up
   delete spotJSON.Reviews;
 
   return res.status(200).json(spotJSON);
