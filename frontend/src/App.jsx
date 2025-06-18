@@ -49,7 +49,7 @@ const router = createBrowserRouter([
       { path: '/signup',         element: <SignupFormModal /> },
       { path: '/spots/new',      element: <CreateSpotForm /> },
       { path: '/spots/:spotId',  element: <SpotDetailsPage /> },
-      { path: '/reviews/:spotId',        element: <ReviewList /> },
+      { path: '/reviews/:spotId', element: <ReviewList /> },
     ],
   }
 ]);

@@ -1,20 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import { createReview } from '../../store/reviews';
 import { useModal } from '../../context/ModalContext';
 
 import './ReviewFormModal.css';
 
-export default function ReviewFormModal() {
+export default function ReviewFormModal({ spotId }) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
-  const { spotId } = useParams();
-
   const [review, setReview] = useState('');
   const [stars, setStars] = useState(0);
   const [errors, setErrors] = useState({});
   const [error, setError] = useState(null);
+  const [hoveredStar, setHoveredStar] = useState(0);
 
   const isDisabled = !(review.trim().length >= 10 && stars > 0);
 
@@ -64,6 +62,8 @@ export default function ReviewFormModal() {
         {errors.review && <p className="review-modal__error">{errors.review}</p>}
         {errors.stars && <p className="review-modal__error">{errors.stars}</p>}
 
+
+
         <textarea
           className="review-modal__textarea"
           value={review}
@@ -74,7 +74,12 @@ export default function ReviewFormModal() {
 
         <div className="review-modal__stars">
           {[1, 2, 3, 4, 5].map((num) => (
-            <label key={num} className="review-modal__star-label">
+            <label 
+              key={num} 
+              className="review-modal__star-label"
+              onMouseEnter={() => setHoveredStar(num)}
+              onMouseLeave={() => setHoveredStar(0)}
+            >
               <input
                 type="radio"
                 name="stars"
@@ -82,7 +87,7 @@ export default function ReviewFormModal() {
                 onChange={() => setStars(num)}
                 className="review-modal__star-input"
               />
-              <span className={num <= stars ? 'filled' : 'empty'}>★</span>
+              <span className={num <= (hoveredStar || stars) ? 'filled' : 'empty'}>★</span>
             </label>
           ))}
         </div>

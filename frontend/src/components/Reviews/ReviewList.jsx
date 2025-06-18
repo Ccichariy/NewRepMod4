@@ -50,7 +50,7 @@ export default function ReviewList() {
         <div className="reviews__post-button">
           <OpenModalButton
             buttonText="Post Your Review"
-            modalComponent={<ReviewFormModal />}
+            modalComponent={<ReviewFormModal spotId={spotId}/>}
           />
         </div>
       )}

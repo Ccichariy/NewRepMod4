@@ -41,6 +41,7 @@ export const fetchSpotReviews = (spotId) => async (dispatch) => {
 
 // Create a new review for the spot
 export const createReview = (spotId, payload) => async (dispatch) => {
+
   const res = await csrfFetch(`/api/spots/${spotId}/reviews`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -53,6 +54,9 @@ export const createReview = (spotId, payload) => async (dispatch) => {
     // { id, userId, spotId, review, stars, createdAt, User: { firstName, … } }
     dispatch(createReviewAction(spotId, newReview));
     dispatch(fetchSpotDetails(spotId)); 
+
+    console.log("Review created:", newReview);
+
     return newReview;
   } else if (res.status === 400) {
     // Validation errors
