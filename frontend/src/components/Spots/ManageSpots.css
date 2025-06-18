@@ -1,0 +1,13 @@
+/* .manage-spots__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+} */
+
+.manage-spots__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}

@@ -10,7 +10,7 @@ import { fetchAllSpots } from '../../store/spots.js';
 
 export default function SpotsList() {
   const dispatch = useDispatch();
-const spots = useSelector(state => Object.values(state.spots.allSpots || {}));
+  const spots = useSelector(state => Object.values(state.spots.allSpots || {}));
 
   useEffect(() => {
     dispatch(fetchAllSpots());

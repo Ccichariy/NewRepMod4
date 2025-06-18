@@ -10,6 +10,7 @@ import SignupFormModal  from '../SignupFormModal/SignupFormModal.jsx';
 
 import * as sessionActions from '../../store/session.js';
 import './ProfileButton.css';
+import { NavLink } from 'react-router-dom';
 
 export default function ProfileButton() {
   const dispatch     = useDispatch();
@@ -55,6 +56,11 @@ export default function ProfileButton() {
             <li>{sessionUser.username}</li>
             <li>{sessionUser.firstName} {sessionUser.lastName}</li>
             <li>{sessionUser.email}</li>
+            <li>
+              <NavLink to="/spots/current" onClick={closeMenu}>
+                <button>Manage Your Spots</button>
+              </NavLink>
+            </li>
             <li>
               <button onClick={handleLogout}>Log Out</button>
             </li>

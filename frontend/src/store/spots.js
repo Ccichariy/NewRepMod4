@@ -49,6 +49,15 @@ export const fetchSpotDetails = (spotId) => async (dispatch) => {
   }
 };
 
+export const fetchUserSpots = () => async dispatch => {
+  const res = await fetch('/api/spots/current');
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(loadSpots(data.Spots)); // Assuming your action is named loadSpots
+  }
+};
+
+
 // Thunk to create a new spot
 export const createSpot = (spotData) => async (dispatch) => {
   const res = await csrfFetch('/api/spots', {
