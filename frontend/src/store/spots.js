@@ -4,6 +4,7 @@ import { csrfFetch } from './csrf';
 const LOAD_SPOTS = 'spots/LOAD_SPOTS';
 const LOAD_SINGLE_SPOT = 'spots/LOAD_SINGLE_SPOT';
 const ADD_SPOT = 'spots/ADD_SPOT';
+const LOAD_USER_SPOTS = 'spots/LOAD_USER_SPOTS';
 
 // Action Creators
 export const loadSpots = (spots) => ({
@@ -21,13 +22,19 @@ export const addSpot = (spot) => ({
   spot
 });
 
+export const loadUserSpots = (spots) => ({
+  type: LOAD_USER_SPOTS,
+  userSpots: spots
+});
+
+
 // Thunk to fetch all spots
 export const fetchAllSpots = () => async (dispatch) => {
   const res = await csrfFetch('/api/spots');
 
   if (res.ok) {
     const data = await res.json();
-    dispatch(loadSpots(data.Spots)); // assuming response is { Spots: [...] }
+    dispatch(loadSpots(data.Spots)); 
     return data.Spots;
   } else {
     const errorData = await res.json();
@@ -53,7 +60,7 @@ export const fetchUserSpots = () => async dispatch => {
   const res = await fetch('/api/spots/current');
   if (res.ok) {
     const data = await res.json();
-    dispatch(loadSpots(data.Spots)); // Assuming your action is named loadSpots
+    dispatch(loadUserSpots(data.Spots)); 
   }
 };
 
@@ -76,10 +83,20 @@ export const createSpot = (spotData) => async (dispatch) => {
   }
 };
 
+// export const fetchUserSpots = () => async dispatch => {
+//   const res = await fetch('/api/spots/current');
+//   if (res.ok) {
+//     const data = await res.json();
+//     dispatch(loadUserSpots(data.Spots));
+//   }
+// };
+
+
 // Initial State
 const initialState = {
   allSpots: {},
-  singleSpot: {}
+  singleSpot: {},
+  userSpots: {}
 };
 
 // Reducer
@@ -91,7 +108,7 @@ const spotsReducer = (state = initialState, action) => {
         newState.allSpots[spot.id] = spot;
       });
       return newState;
-    }
+      }
     case LOAD_SINGLE_SPOT:
       return {
         ...state,
@@ -105,6 +122,14 @@ const spotsReducer = (state = initialState, action) => {
           [action.spot.id]: action.spot
         }
       };
+    case LOAD_USER_SPOTS: {
+      const newState = {...state, userSpots: {}};
+      action.userSpots.forEach(spot => {
+        newState.userSpots[spot.id] = spot;
+    });
+    return newState;
+      }
+  
     default:
       return state;
   }

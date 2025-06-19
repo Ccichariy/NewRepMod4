@@ -7,7 +7,7 @@ import './ManageSpots.css';
 export default function ManageSpots() {
   const dispatch = useDispatch();
 
-  const userSpots = useSelector(state => Object.values(state.spots.allSpots || {}));
+  const userSpots = useSelector(state => Object.values(state.spots.userSpots || {}));
   const user = useSelector(state => state.session.user);
 
   useEffect(() => {

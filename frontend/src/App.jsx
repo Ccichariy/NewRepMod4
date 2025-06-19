@@ -21,10 +21,20 @@ function Layout() {
   const dispatch   = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
 
+  // useEffect(() => {
+  //   dispatch(sessionActions.restoreUser())
+  //     .then(() => setIsLoaded(true));
+  // }, [dispatch]);
+
   useEffect(() => {
-    dispatch(sessionActions.restoreUser())
-      .then(() => setIsLoaded(true));
-  }, [dispatch]);
+  fetch("/api/csrf/restore", {
+    credentials: "include"
+  })
+    .then(() => {
+      dispatch(sessionActions.restoreUser())
+        .then(() => setIsLoaded(true));
+    });
+}, [dispatch]);
 
   return (
     <>
