@@ -29,11 +29,10 @@ export default function ManageSpots() {
     <div className="manage-spots__container">
       <h1>Manage Your Spots</h1>
       <div className="manage-spots__grid">
-        {userSpots.filter(Boolean).map(spot => (
-            
-            console.log("Spot", spot),
-          <ManageSpotCard key={spot.id} spot={spot} />
-        ))}
+        {userSpots.filter(Boolean).map(spot => {
+            console.log("Spot", spot);
+          return <ManageSpotCard key={spot.id} spot={spot} />
+        })}
       </div>
     </div>
   );
