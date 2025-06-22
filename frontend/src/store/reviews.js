@@ -1,5 +1,5 @@
-import { csrfFetch } from './csrf'; // adjust path if needed
-import { fetchSpotDetails } from './spots'; // or the correct path to your spots store
+import { csrfFetch } from './csrf'; 
+import { fetchSpotDetails } from './spots';
 
 const LOAD_SPOT_REVIEWS = 'reviews/LOAD_SPOT_REVIEWS';
 const CREATE_REVIEW    = 'reviews/CREATE_REVIEW';
@@ -120,3 +120,4 @@ export default function reviewsReducer(state = initialState, action) {
   }
 }
 
+// code source and modified from ChatGPT.

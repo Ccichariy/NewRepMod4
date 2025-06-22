@@ -11,3 +11,25 @@
   gap: 1rem;
   margin: 2rem 0;
 }
+
+.manage-buttons {
+  margin-top: 8px;
+  display: flex;
+  gap: 10px;
+}
+
+.manage-buttons button {
+  padding: 6px 12px;
+  border: none;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+}
+
+.manage-buttons button:last-child {
+  background-color: #dc3545;
+}
+
+
+/* // code source and modified from ChatGPT. */

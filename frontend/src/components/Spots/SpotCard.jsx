@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import '../Spots/SpotCard.css'; // adjust if you move the file
+import '../Spots/SpotCard.css';
 
 export default function SpotCard({ spot }) {
   return (
@@ -14,19 +14,24 @@ export default function SpotCard({ spot }) {
         alt={spot.name}
         className="spot-preview-image"
       />
-      <div className="spot-location">
-        {spot.city}, {spot.state}
-      </div>
-      <div className="spot-price">
-        ${spot.price} night
-      </div>
-      <div className="spot-rating">
-        ★ {Number.isFinite(spot.avgRating) ? spot.avgRating.toFixed(1) : "New"}
+      <div className="spot-info">
+        <div>
+          <div className="spot-location">
+            {spot.city}, {spot.state}
+          </div>
+          <div className="spot-price">
+            ${spot.price} night
+          </div>
+        </div>
+        <div className="spot-rating">
+          ★ {Number.isFinite(spot.avgRating) ? spot.avgRating.toFixed(1) : "New"}
+        </div>
       </div>
     </Link>
   );
 }
 
+// code source and modified from ChatGPT.
 
 // import { Link } from 'react-router-dom';
 // import '../SpotCard/SpotCard.css';

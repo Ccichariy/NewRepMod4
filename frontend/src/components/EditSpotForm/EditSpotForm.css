@@ -1,0 +1,73 @@
+.create-spot-form {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: sans-serif;
+}
+
+.create-spot-form h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.create-spot-form h2 {
+  margin-top: 2rem;
+  margin-bottom: 0.3rem;
+  font-size: 1.2rem;
+}
+
+.create-spot-form .caption {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.create-spot-form label {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-weight: bold;
+}
+
+.create-spot-form input,
+.create-spot-form textarea {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.lat-lng-container,
+.city-state-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.lat-lng-container input,
+.city-state-container input {
+  flex: 1;
+}
+
+.create-spot-form .error {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: -0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.create-spot-form button[type="submit"] {
+  width: 100%;
+  background-color: #ff385c;
+  color: white;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.create-spot-form button[type="submit"]:hover {
+  background-color: #e03150;
+}
+
+/* code source and modified from ChatGPT. */

@@ -16,24 +16,23 @@ export default function ManageSpots() {
     }
   }, [dispatch, user]);
 
-  if (!userSpots.length) {
-    return (
-      <div className="manage-spots__empty">
-        <h2>You don’t have any spots yet</h2>
-        <p>Click “Create a New Spot” to get started!</p>
-      </div>
-    );
-  }
-
   return (
     <div className="manage-spots__container">
       <h1>Manage Your Spots</h1>
-      <div className="manage-spots__grid">
-        {userSpots.filter(Boolean).map(spot => {
-            console.log("Spot", spot);
-          return <ManageSpotCard key={spot.id} spot={spot} />
-        })}
-      </div>
+      {userSpots.length ? (
+        <div className="manage-spots__grid">
+          {userSpots.filter(Boolean).map(spot => (
+            <ManageSpotCard key={spot.id} spot={spot} />
+          ))}
+        </div>
+      ) : (
+        <div className="manage-spots__empty">
+          <h2>You don’t have any spots yet</h2>
+          <p>Click “Create a New Spot” to get started!</p>
+        </div>
+      )}
     </div>
   );
 }
+
+// code source and modified from ChatGPT.

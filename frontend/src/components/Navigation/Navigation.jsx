@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux'; // ✅ Add this
+import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton.jsx';
 import './Navigation.css';
 
@@ -28,6 +28,9 @@ export default function Navigation({ isLoaded }) {
     </header>
   );
 }
+
+
+// code source and modified from ChatGPT.
 
 // import { NavLink } from 'react-router-dom';
 // import { useSelector } from 'react-redux';

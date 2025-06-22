@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  /* border: 1px solid #ddd;
+  border-radius: 8px; */
   overflow: hidden;
   background: #fff;
   position: relative;
@@ -43,13 +43,17 @@
 
 /* Star rating pinned to bottom-right */
 .spot-rating {
-  margin-top: auto;       /* pushes it to the bottom */
-  padding: 0 1rem 1rem;
+  /* margin-top: auto;      */
+  /* padding: 0 1rem 1rem; */
   font-size: 0.9rem;
   color: #111;
-  align-self: flex-end;   /* right-align within the card */
+  /* align-self: flex-end;   */
 }
-
+.spot-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
 
 /* .spot-card {
   display: flex;
@@ -63,13 +67,10 @@
   object-fit: cover;
 }
 
-.spot-info {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 0.5rem;
-}
 
 .spot-price {
   margin-top: 0.25rem;
   font-weight: bold;
 } */
+
+/* // code source and modified from ChatGPT. */

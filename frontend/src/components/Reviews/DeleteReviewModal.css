@@ -1,0 +1,44 @@
+.delete-modal {
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.delete-modal h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.delete-modal p {
+  margin-bottom: 20px;
+}
+
+.delete-modal-buttons {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.delete-button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancel-button {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* code source and modified from ChatGPT. */
+

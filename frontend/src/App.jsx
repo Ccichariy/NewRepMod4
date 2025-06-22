@@ -11,6 +11,7 @@ import LoginFormModal    from './components/LoginFormModal/LoginFormModal.jsx';
 import SignupFormModal   from './components/SignupFormModal/SignupFormModal.jsx';
 import CreateSpotForm    from './components/CreateSpotForm/CreateSpotForm.jsx';
 import SpotDetailsPage   from './components/SpotDetailsPage/SpotDetailsPage.jsx';
+import EditSpotForm      from './components/EditSpotForm/EditSpotForm.jsx';
 
 import * as sessionActions from './store/session.js';
 import SpotsList from './components/Spots/SpotsList.jsx';
@@ -60,6 +61,7 @@ const router = createBrowserRouter([
       { path: '/signup',         element: <SignupFormModal /> },
       { path: '/spots/new',      element: <CreateSpotForm /> },
       { path: '/spots/:spotId',  element: <SpotDetailsPage /> },
+      { path: '/spots/:spotId/edit',  element: <EditSpotForm /> },
       { path: '/reviews/:spotId', element: <ReviewList /> },
       { path: '/spots/current', element: <ManageSpots /> }
     ],
@@ -70,7 +72,7 @@ export default function App() {
   return <RouterProvider router={router} />;
 }
 
-
+// code source and modified from ChatGPT.
 
 // import { useState, useEffect } from 'react';
 // import { useDispatch } from 'react-redux';
