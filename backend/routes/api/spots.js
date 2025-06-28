@@ -192,7 +192,7 @@ router.get('/:spotId', async (req, res) => {
 
   const numReviews = reviews.length;
   const avgRating = numReviews
-    ? (reviews.reduce((sum, r) => sum + r.stars, 0) / numReviews).toFixed(1)
+    ? reviews.reduce((sum, r) => sum + r.stars, 0) / numReviews
     : null;
 
   spotJSON.numReviews = numReviews;
