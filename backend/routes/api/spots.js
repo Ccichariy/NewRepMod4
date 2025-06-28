@@ -40,7 +40,7 @@ const validateQueryFilters = [
     .optional()
     .isInt({ min: 1, max: 20 })
     .withMessage('Size must be between 1 and 20'),
-    check('minLat')
+  check('minLat')
     .optional()
     .isFloat({ min: -90, max: 90 })
     .withMessage('Minimum latitude is invalid'),
@@ -84,15 +84,15 @@ router.get('/', validateQueryFilters, async (req, res) => {
 
   const where = {};
 
-if (minLat !== undefined) where.lat = { [Op.gte]: parseFloat(minLat) };
-if (maxLat !== undefined)
-  where.lat = { ...where.lat, [Op.lte]: parseFloat(maxLat) };
-if (minLng !== undefined) where.lng = { [Op.gte]: parseFloat(minLng) };
-if (maxLng !== undefined)
-  where.lng = { ...where.lng, [Op.lte]: parseFloat(maxLng) };
-if (minPrice !== undefined) where.price = { [Op.gte]: parseFloat(minPrice) };
-if (maxPrice !== undefined)
-  where.price = { ...where.price, [Op.lte]: parseFloat(maxPrice) };
+  if (minLat !== undefined) where.lat = { [Op.gte]: parseFloat(minLat) };
+  if (maxLat !== undefined)
+    where.lat = { ...where.lat, [Op.lte]: parseFloat(maxLat) };
+  if (minLng !== undefined) where.lng = { [Op.gte]: parseFloat(minLng) };
+  if (maxLng !== undefined)
+    where.lng = { ...where.lng, [Op.lte]: parseFloat(maxLng) };
+  if (minPrice !== undefined) where.price = { [Op.gte]: parseFloat(minPrice) };
+  if (maxPrice !== undefined)
+    where.price = { ...where.price, [Op.lte]: parseFloat(maxPrice) };
 
   const spots = await Spot.findAll({
     limit,
@@ -128,7 +128,7 @@ if (maxPrice !== undefined)
     page: parseInt(page),
     size: parseInt(size)
   });
-  });
+});
 
 router.get('/current', requireAuth, async (req, res) => {
   const userId = req.user.id;
@@ -176,8 +176,8 @@ router.get('/:spotId', async (req, res) => {
             model: User,
             attributes: ['id', 'firstName', 'lastName']
           }
-       ]
-    }]
+        ]
+      }]
   });
 
   if (!spot) {
@@ -196,7 +196,7 @@ router.get('/:spotId', async (req, res) => {
     : null;
 
   spotJSON.numReviews = numReviews;
-  spotJSON.avgRating = avgRating;
+  spotJSON.avgRating = avgRating.toFixed(1);
 
   delete spotJSON.Reviews;
 
@@ -332,12 +332,12 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
   }
 
   if (spot.ownerId !== userId) {
-    return res. status(403).json({ message: "Forbidden. User id not found. "});
+    return res.status(403).json({ message: "Forbidden. User id not found. " });
   }
 
   await spot.destroy();
 
-  return res.status(200).json({ message: "Successfully deleted "});
+  return res.status(200).json({ message: "Successfully deleted " });
 })
 
 
