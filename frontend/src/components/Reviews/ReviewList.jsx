@@ -32,25 +32,13 @@ export default function ReviewList() {
 
   return (
     <div className="reviews">
-      <h2 className="reviews__heading">
-        {reviews.length > 0 ? (
-          <>
-            <i className="fa fa-star"></i>{' '}
-            
-            {(
-              reviews.reduce((sum, r) => sum + r.stars, 0) / reviews.length
-            ).toFixed(1)}{' '}
-            · {reviews.length} {reviews.length === 1 ? 'Review' : 'Reviews'}
-          </>
-        ) : ('New')
-        }
-      </h2>
+
 
       {user && user.id !== spotOwnerId && !hasReviewed && (
         <div className="reviews__post-button">
           <OpenModalButton
             buttonText="Post Your Review"
-            modalComponent={<ReviewFormModal spotId={spotId}/>}
+            modalComponent={<ReviewFormModal spotId={spotId} />}
           />
         </div>
       )}

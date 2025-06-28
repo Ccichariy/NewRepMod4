@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserSpots } from '../../store/spots';
@@ -29,6 +30,9 @@ export default function ManageSpots() {
         <div className="manage-spots__empty">
           <h2>You don’t have any spots yet</h2>
           <p>Click “Create a New Spot” to get started!</p>
+          <NavLink to="/spots/new">
+            <button>Create a New Spot</button>
+          </NavLink>
         </div>
       )}
     </div>

@@ -10,8 +10,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Spot.belongsTo(models.User, { foreignKey: 'ownerId',
-  as: 'Owner' });
+      Spot.belongsTo(models.User, {
+        foreignKey: 'ownerId',
+        as: 'Owner'
+      });
 
       Spot.hasMany(models.SpotImage, {
         foreignKey: 'spotId',
@@ -36,17 +38,17 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-          model: 'Users',
-          key: 'id'
-        }
-      },
+        model: 'Users',
+        key: 'id'
+      }
+    },
     address: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-          len: [5, 255]
-        }
-      },
+        len: [5, 255]
+      }
+    },
     city: {
       type: DataTypes.STRING,
       allowNull: false
@@ -58,10 +60,10 @@ module.exports = (sequelize, DataTypes) => {
     country: {
       type: DataTypes.STRING,
       allowNull: false
-      },
+    },
     lat: {
       type: DataTypes.DECIMAL(10, 7),
-      allowNull: false,
+      allowNull: true,
       validate: {
         min: -90,
         max: 90
@@ -69,7 +71,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     lng: {
       type: DataTypes.DECIMAL(10, 7),
-      allowNull: false,
+      allowNull: true,
       validate: {
         min: -180,
         max: 180
@@ -85,18 +87,18 @@ module.exports = (sequelize, DataTypes) => {
     description: {
       type: DataTypes.TEXT,
       allowNull: false
-      },
+    },
     price: {
       type: DataTypes.DECIMAL(10, 2),
-        allowNull: false,
-        validate: {
-          min: 0
+      allowNull: false,
+      validate: {
+        min: 0
       },
     }
   },
-  {
-  sequelize,
-    modelName: 'Spot',
-  });
+    {
+      sequelize,
+      modelName: 'Spot',
+    });
   return Spot;
 };
