@@ -24,7 +24,7 @@ export default function SpotCard({ spot }) {
           </div>
         </div>
         <div className="spot-rating">
-          ★ {spot.avgRating !== null ? spot.avgRating.toFixed(1) : "New"}
+          ★ {Number.isFinite(spot.avgRating) ? spot.avgRating.toFixed(1) : "New"}
         </div>
       </div>
     </Link>
